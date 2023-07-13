@@ -14,12 +14,13 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
-    private final RoleService roleService;
     private final UserService userService;
+    private final RoleService roleService;
 
-    public UserController(RoleService roleService, UserService userService) {
-        this.roleService = roleService;
+
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/create")

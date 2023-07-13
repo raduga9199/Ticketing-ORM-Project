@@ -13,15 +13,9 @@ public class ProjectDtoConverter implements Converter<String, ProjectDTO> {
         return null;
     }
 
-    @Override
-    public <U> Converter<String, U> andThen(Converter<? super ProjectDTO, ? extends U> after) {
-        return Converter.super.andThen(after);
-    }
-
-
 //    ProjectService projectService;
-
-    //injection
+//
+//    //injection
 //    public ProjectDtoConverter(ProjectService projectService) {
 //        this.projectService = projectService;
 //    }
@@ -36,5 +30,4 @@ public class ProjectDtoConverter implements Converter<String, ProjectDTO> {
 //        return projectService.findById(source);
 //
 //    }
-
 }

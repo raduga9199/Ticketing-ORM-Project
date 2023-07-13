@@ -1,6 +1,8 @@
 package com.cydeo.converter;
 
 import com.cydeo.dto.RoleDTO;
+import com.cydeo.mapper.RoleMapper;
+import com.cydeo.repository.RoleRepository;
 import com.cydeo.service.RoleService;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.annotation.Lazy;
@@ -14,9 +16,12 @@ public class RoleDtoConverter implements Converter<String, RoleDTO> {
 
     RoleService roleService;
 
+
+
     //injection
     public RoleDtoConverter(@Lazy RoleService roleService) {
         this.roleService = roleService;
+
     }
 
     @Override
@@ -29,6 +34,8 @@ public class RoleDtoConverter implements Converter<String, RoleDTO> {
         return roleService.findById(Long.parseLong(source));
 
     }
+
+
 
 
 }
