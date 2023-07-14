@@ -38,6 +38,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDTO> findAllManagers() {
+        List<User> userList = userRepository.findAll(Sort.by("firstName"));
+        return userList.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public User assignedManager() {
+        return null;
+    }
+
+
+    @Override
     public void save(UserDTO dto) {
         userRepository.save(userMapper.convertToEntity(dto));
     }

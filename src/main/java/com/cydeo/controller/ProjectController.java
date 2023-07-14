@@ -2,7 +2,9 @@ package com.cydeo.controller;
 
 import com.cydeo.dto.ProjectDTO;
 import com.cydeo.dto.UserDTO;
+import com.cydeo.service.ProjectService;
 import com.cydeo.service.UserService;
+import net.bytebuddy.description.annotation.AnnotationValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,9 +16,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-/*
-    ProjectService projectService;
-    UserService userService;
+
+    private final ProjectService projectService;
+    private final UserService userService;
 
     public ProjectController(ProjectService projectService, UserService userService) {
         this.projectService = projectService;
@@ -27,12 +29,13 @@ public class ProjectController {
     public String createProject(Model model) {
 
         model.addAttribute("project", new ProjectDTO());
-        model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("managers", userService.findManagers());
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("managers", userService.findAllManagers());
 
         return "/project/create";
 
     }
+    /*
 
     @PostMapping("/create")
     public String insertProject(@Valid @ModelAttribute("project") ProjectDTO project, BindingResult bindingResult, Model model) {
@@ -109,6 +112,8 @@ public class ProjectController {
         return "redirect:/project/manager/project-status";
     }
 
- */
 
+
+
+     */
 }
