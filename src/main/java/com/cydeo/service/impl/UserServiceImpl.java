@@ -46,12 +46,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User assignedManager() {
-        return null;
-    }
-
-
-    @Override
     public void save(UserDTO dto) {
         userRepository.save(userMapper.convertToEntity(dto));
     }
