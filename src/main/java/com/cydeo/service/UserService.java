@@ -8,7 +8,8 @@ public interface UserService {
     List<UserDTO> listAllUser();
     UserDTO findByUserName(String username);
     void save(UserDTO dto);
-    UserDTO update(UserDTO dro);
+    UserDTO update(UserDTO dto);
     void deleteByUserName(String username);
+    void delete(String username);
 
 }
