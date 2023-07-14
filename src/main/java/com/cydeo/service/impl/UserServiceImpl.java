@@ -1,6 +1,7 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.UserDTO;
+import com.cydeo.entity.Role;
 import com.cydeo.entity.User;
 import com.cydeo.mapper.UserMapper;
 import com.cydeo.repository.UserRepository;
@@ -37,10 +38,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.convertToDTO(user);
     }
 
+
     @Override
-    public List<UserDTO> findAllManagers() {
-        List<User> userList = userRepository.findAll(Sort.by("firstName"));
-        return userList.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
+    public List<UserDTO> listAllByRole(String role) {
+        List<User> users = userRepository.findAllByRoleDescriptionIgnoreCase(role);
+        return users.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
     }
 
     @Override

@@ -12,8 +12,10 @@ public interface UserService {
     List<UserDTO> listAllUser();
     UserDTO findByUserName(String username);
     // SELECT * FROM USERS WHERE ROLES='manager'
-    List<UserDTO> findAllManagers();
+    List<UserDTO> listAllByRole(String role);
     User assignedManager();
+
+
     void save(UserDTO dto);
     UserDTO update(UserDTO dto);
     void deleteByUserName(String username);
