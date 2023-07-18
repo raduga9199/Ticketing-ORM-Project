@@ -8,7 +8,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "tasks")
 @Data
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")

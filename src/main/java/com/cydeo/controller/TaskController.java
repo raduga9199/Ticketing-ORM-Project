@@ -36,14 +36,14 @@ public class TaskController {
 
         return "task/create";
     }
-/*
+
     @PostMapping("/create")
-    public String insertTask(@Valid @ModelAttribute("task") TaskDTO task, BindingResult bindingResult, Model model) {
+    public String insertTask( @ModelAttribute("task") TaskDTO task, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("projects", projectService.listAllProjects());
-            model.addAttribute("employees", userService.listAllByRole("employees"));
+            model.addAttribute("employees", userService.listAllByRole("employee"));
             model.addAttribute("tasks", taskService.listAllTasks());
 
             return "/task/create";
@@ -55,11 +55,14 @@ public class TaskController {
         return "redirect:/task/create";
     }
 
+
     @GetMapping("/delete/{taskId}")
     public String deleteTask(@PathVariable("taskId") Long taskId) {
         taskService.delete(taskId);
         return "redirect:/task/create";
     }
+
+    /*
 
     @GetMapping("/update/{taskId}")
     public String editTask(@PathVariable("taskId") Long taskId, Model model) {
