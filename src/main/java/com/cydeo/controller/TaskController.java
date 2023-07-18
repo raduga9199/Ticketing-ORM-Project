@@ -2,6 +2,8 @@ package com.cydeo.controller;
 
 import com.cydeo.dto.TaskDTO;
 import com.cydeo.enums.Status;
+import com.cydeo.service.ProjectService;
+import com.cydeo.service.TaskService;
 import com.cydeo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/task")
 public class TaskController {
-
-    /*
 
     private final TaskService taskService;
     private final ProjectService projectService;
@@ -30,9 +30,9 @@ public class TaskController {
     public String createTask(Model model) {
 
         model.addAttribute("task", new TaskDTO());
-        model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("employees", userService.findEmployees());
-        model.addAttribute("tasks", taskService.findAll());
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("employees", userService.listAllByRole("employees"));
+        model.addAttribute("tasks", taskService.listAllTasks());
 
         return "task/create";
     }
@@ -42,9 +42,9 @@ public class TaskController {
 
         if (bindingResult.hasErrors()) {
 
-            model.addAttribute("projects", projectService.findAll());
-            model.addAttribute("employees", userService.findEmployees());
-            model.addAttribute("tasks", taskService.findAll());
+            model.addAttribute("projects", projectService.listAllProjects());
+            model.addAttribute("employees", userService.listAllByRole("employees"));
+            model.addAttribute("tasks", taskService.listAllTasks());
 
             return "/task/create";
 
@@ -64,10 +64,10 @@ public class TaskController {
     @GetMapping("/update/{taskId}")
     public String editTask(@PathVariable("taskId") Long taskId, Model model) {
 
-        model.addAttribute("task", taskService.findById(taskId));
-        model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("employees", userService.findEmployees());
-        model.addAttribute("tasks", taskService.findAll());
+        model.addAttribute("task", taskService.getTaskById(taskId));
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("employees", userService.listAllByRole("employees"));
+        model.addAttribute("tasks", taskService.listAllTasks());
 
         return "task/update";
 
@@ -85,9 +85,9 @@ public class TaskController {
 
         if (bindingResult.hasErrors()) {
 
-            model.addAttribute("projects", projectService.findAll());
-            model.addAttribute("employees", userService.findEmployees());
-            model.addAttribute("tasks", taskService.findAll());
+            model.addAttribute("projects", projectService.listAllProjects());
+            model.addAttribute("employees", userService.listAllByRole("employees"));
+            model.addAttribute("tasks", taskService.listAllTasks());
 
             return "/task/update";
 
@@ -106,7 +106,7 @@ public class TaskController {
     @GetMapping("/employee/edit/{id}")
     public String employeeEditTask(@PathVariable("id") Long id, Model model) {
 
-        model.addAttribute("task", taskService.findById(id));
+        model.addAttribute("task", taskService.getTaskById(id));
         model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
         model.addAttribute("statuses", Status.values());
 
@@ -137,6 +137,6 @@ public class TaskController {
         return "task/archive";
     }
 
-     */
+
 
 }

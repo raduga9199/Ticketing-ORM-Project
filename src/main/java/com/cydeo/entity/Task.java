@@ -11,18 +11,16 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "projects")
-@Where(clause = "is_deleted=false") /***/
-public class Project extends BaseEntity{
-    /***/
+@Where(clause = "is_deleted=false")
+public class Task extends BaseEntity{
 
-    @Column(unique = true)
-    private String projectCode;
-    private String projectName;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
-    private User assignedManager;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private User assignedEmployee;
 
     @Column(columnDefinition = "DATE")
     private LocalDate startDate;
@@ -30,12 +28,12 @@ public class Project extends BaseEntity{
     @Column(columnDefinition = "DATE")
     private LocalDate endDate;
 
-    private String projectDetail;
+    private String taskSubject;
+    private String taskDetail;
 
     @Enumerated(EnumType.STRING)
-    private Status projectStatus;
+    private Status taskStatus;
 
-
-    /***/
+    //private String Action;
 
 }
