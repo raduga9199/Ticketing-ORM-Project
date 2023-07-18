@@ -14,26 +14,15 @@ import java.time.LocalDate;
 @Where(clause = "is_deleted=false")
 public class Task extends BaseEntity{
 
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private User assignedEmployee;
-
-    @Column(columnDefinition = "DATE")
-    private LocalDate startDate;
-
-    @Column(columnDefinition = "DATE")
-    private LocalDate endDate;
-
     private String taskSubject;
     private String taskDetail;
-
     @Enumerated(EnumType.STRING)
     private Status taskStatus;
-
-    //private String Action;
+    @Column(columnDefinition = "DATE")
+    private LocalDate assignDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User assignedEmployee;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Project project;
 
 }

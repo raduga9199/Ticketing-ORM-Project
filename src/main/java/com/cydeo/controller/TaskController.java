@@ -31,12 +31,12 @@ public class TaskController {
 
         model.addAttribute("task", new TaskDTO());
         model.addAttribute("projects", projectService.listAllProjects());
-        model.addAttribute("employees", userService.listAllByRole("employees"));
+        model.addAttribute("employees", userService.listAllByRole("employee"));
         model.addAttribute("tasks", taskService.listAllTasks());
 
         return "task/create";
     }
-
+/*
     @PostMapping("/create")
     public String insertTask(@Valid @ModelAttribute("task") TaskDTO task, BindingResult bindingResult, Model model) {
 
@@ -57,14 +57,14 @@ public class TaskController {
 
     @GetMapping("/delete/{taskId}")
     public String deleteTask(@PathVariable("taskId") Long taskId) {
-        taskService.deleteById(taskId);
+        taskService.delete(taskId);
         return "redirect:/task/create";
     }
 
     @GetMapping("/update/{taskId}")
     public String editTask(@PathVariable("taskId") Long taskId, Model model) {
 
-        model.addAttribute("task", taskService.getTaskById(taskId));
+        model.addAttribute("task", taskService.findById(taskId));
         model.addAttribute("projects", projectService.listAllProjects());
         model.addAttribute("employees", userService.listAllByRole("employees"));
         model.addAttribute("tasks", taskService.listAllTasks());
@@ -106,7 +106,7 @@ public class TaskController {
     @GetMapping("/employee/edit/{id}")
     public String employeeEditTask(@PathVariable("id") Long id, Model model) {
 
-        model.addAttribute("task", taskService.getTaskById(id));
+        model.addAttribute("task", taskService.findById(id));
         model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
         model.addAttribute("statuses", Status.values());
 
@@ -138,5 +138,5 @@ public class TaskController {
     }
 
 
-
+*/
 }

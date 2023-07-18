@@ -26,7 +26,7 @@ public class TaskDtoConverter implements Converter<String, TaskDTO> {
 
             return null;
         }
-        return taskService.getTaskById(Long.parseLong(source));
+        return taskService.findById(Long.parseLong(source));
     }
 
 

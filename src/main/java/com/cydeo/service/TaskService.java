@@ -6,14 +6,16 @@ import com.cydeo.enums.Status;
 import java.util.List;
 
 public interface TaskService {
-    TaskDTO getTaskById(Long taskId);
+
+    TaskDTO findById(Long taskId);
     List<TaskDTO> listAllTasks();
     void save(TaskDTO dto);
-    void deleteById(Long taskId);
     void update(TaskDTO task);
+    void delete(Long id);
+
     Status findAllTasksByStatusIsNot(Status status);
-
     void updateStatus(TaskDTO task);
-
     Status findAllTasksByStatus(Status status);
+
+
 }

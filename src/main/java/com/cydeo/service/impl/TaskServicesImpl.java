@@ -24,7 +24,7 @@ public class TaskServicesImpl implements TaskService {
     }
 
     @Override
-    public TaskDTO getTaskById(Long taskId) {
+    public TaskDTO findById(Long taskId) {
 
         Task task = taskRepository.findTaskById(taskId);
         return taskMapper.convertToDTO(task);
@@ -44,12 +44,10 @@ public class TaskServicesImpl implements TaskService {
     public void save(TaskDTO dto) {
         taskRepository.save(taskMapper.convertToEntity(dto));
     }
-
     @Override
-    public void deleteById(Long taskId) {
+    public void delete(Long taskId) {
 
     }
-
     @Override
     public void update(TaskDTO task) {
 
