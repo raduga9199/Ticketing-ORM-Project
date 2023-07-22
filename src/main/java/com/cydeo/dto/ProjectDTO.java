@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class ProjectDTO {
 
-    private Long id;
 
     @NotBlank
     private String projectName;
