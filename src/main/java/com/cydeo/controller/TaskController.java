@@ -2,8 +2,6 @@ package com.cydeo.controller;
 
 import com.cydeo.dto.TaskDTO;
 import com.cydeo.enums.Status;
-import com.cydeo.service.ProjectService;
-import com.cydeo.service.TaskService;
 import com.cydeo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,8 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/task")
 public class TaskController {
+
+    /*
 
     private final TaskService taskService;
     private final ProjectService projectService;
@@ -30,21 +30,21 @@ public class TaskController {
     public String createTask(Model model) {
 
         model.addAttribute("task", new TaskDTO());
-        model.addAttribute("projects", projectService.listAllProjects());
-        model.addAttribute("employees", userService.listAllByRole("employee"));
-        model.addAttribute("tasks", taskService.listAllTasks());
+        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("employees", userService.findEmployees());
+        model.addAttribute("tasks", taskService.findAll());
 
         return "task/create";
     }
 
     @PostMapping("/create")
-    public String insertTask( @ModelAttribute("task") TaskDTO task, BindingResult bindingResult, Model model) {
+    public String insertTask(@Valid @ModelAttribute("task") TaskDTO task, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
 
-            model.addAttribute("projects", projectService.listAllProjects());
-            model.addAttribute("employees", userService.listAllByRole("employee"));
-            model.addAttribute("tasks", taskService.listAllTasks());
+            model.addAttribute("projects", projectService.findAll());
+            model.addAttribute("employees", userService.findEmployees());
+            model.addAttribute("tasks", taskService.findAll());
 
             return "/task/create";
 
@@ -55,22 +55,19 @@ public class TaskController {
         return "redirect:/task/create";
     }
 
-
     @GetMapping("/delete/{taskId}")
     public String deleteTask(@PathVariable("taskId") Long taskId) {
-        taskService.delete(taskId);
+        taskService.deleteById(taskId);
         return "redirect:/task/create";
     }
-
-    /*
 
     @GetMapping("/update/{taskId}")
     public String editTask(@PathVariable("taskId") Long taskId, Model model) {
 
         model.addAttribute("task", taskService.findById(taskId));
-        model.addAttribute("projects", projectService.listAllProjects());
-        model.addAttribute("employees", userService.listAllByRole("employees"));
-        model.addAttribute("tasks", taskService.listAllTasks());
+        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("employees", userService.findEmployees());
+        model.addAttribute("tasks", taskService.findAll());
 
         return "task/update";
 
@@ -88,9 +85,9 @@ public class TaskController {
 
         if (bindingResult.hasErrors()) {
 
-            model.addAttribute("projects", projectService.listAllProjects());
-            model.addAttribute("employees", userService.listAllByRole("employees"));
-            model.addAttribute("tasks", taskService.listAllTasks());
+            model.addAttribute("projects", projectService.findAll());
+            model.addAttribute("employees", userService.findEmployees());
+            model.addAttribute("tasks", taskService.findAll());
 
             return "/task/update";
 
@@ -140,6 +137,6 @@ public class TaskController {
         return "task/archive";
     }
 
+     */
 
-*/
 }

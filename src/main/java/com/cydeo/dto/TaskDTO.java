@@ -1,19 +1,15 @@
 package com.cydeo.dto;
 
 import com.cydeo.enums.Status;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class TaskDTO {
 
@@ -34,13 +30,7 @@ public class TaskDTO {
     private Status taskStatus;
     private LocalDate assignedDate;
 
-    public TaskDTO(ProjectDTO project,
-                   UserDTO assignedEmployee,
-                   String taskSubject,
-                   String taskDetail,
-                   Status taskStatus,
-                   LocalDate assignedDate) {
-
+    public TaskDTO(ProjectDTO project, UserDTO assignedEmployee, String taskSubject, String taskDetail, Status taskStatus, LocalDate assignedDate) {
         this.project = project;
         this.assignedEmployee = assignedEmployee;
         this.taskSubject = taskSubject;

@@ -26,7 +26,6 @@ public class Project extends BaseEntity{
 
     @Column(columnDefinition = "DATE")
     private LocalDate startDate;
-
     @Column(columnDefinition = "DATE")
     private LocalDate endDate;
 
@@ -34,6 +33,11 @@ public class Project extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private Status projectStatus;
+
+
+
+
+
 
 
     /***/
