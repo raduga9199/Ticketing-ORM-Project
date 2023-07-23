@@ -53,38 +53,39 @@ public class ProjectController {
         return "redirect:/project/create";
 
     }
-    /*
+
 
     @GetMapping("/delete/{projectcode}")
     public String deleteProject(@PathVariable("projectcode") String projectcode) {
-        projectService.deleteById(projectcode);
+        projectService.delete(projectcode);
         return "redirect:/project/create";
     }
 
+
     @GetMapping("/complete/{projectcode}")
     public String completeProject(@PathVariable("projectcode") String projectcode) {
-        projectService.complete(projectService.findById(projectcode));
+        projectService.complete(projectcode);
         return "redirect:/project/create";
     }
 
     @GetMapping("/update/{projectcode}")
     public String editProject(@PathVariable("projectcode") String projectcode, Model model) {
 
-        model.addAttribute("project", projectService.findById(projectcode));
-        model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("managers", userService.findManagers());
+        model.addAttribute("project", projectService.getByProjectCode(projectcode));
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("managers", userService.listAllByRole("manager"));
 
         return "/project/update";
 
     }
 
     @PostMapping("/update")
-    public String updateProject(@Valid @ModelAttribute("project") ProjectDTO project, BindingResult bindingResult, Model model) {
+    public String updateProject( @ModelAttribute("project") ProjectDTO project, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
 
-            model.addAttribute("projects", projectService.findAll());
-            model.addAttribute("managers", userService.findManagers());
+            model.addAttribute("projects", projectService.listAllProjects());
+            model.addAttribute("managers", userService.listAllByRole("manager"));
 
             return "/project/update";
 
@@ -94,7 +95,7 @@ public class ProjectController {
         return "redirect:/project/create";
 
     }
-
+/*
     @GetMapping("/manager/project-status")
     public String getProjectByManager(Model model) {
 
