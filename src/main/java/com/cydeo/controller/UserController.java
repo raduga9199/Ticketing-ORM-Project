@@ -17,7 +17,6 @@ public class UserController {
     private final UserService userService;
     private final RoleService roleService;
 
-
     public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
@@ -28,11 +27,10 @@ public class UserController {
 
         model.addAttribute("user", new UserDTO());
         model.addAttribute("roles", roleService.listAllRoles());
-        model.addAttribute("users", userService.listAllUser());
+        model.addAttribute("users", userService.listAllUsers());
 
         return "/user/create";
     }
-
 
 
     @PostMapping("/create")
@@ -41,7 +39,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("roles", roleService.listAllRoles());
-            model.addAttribute("users", userService.listAllUser());
+            model.addAttribute("users", userService.listAllUsers());
 
             return "/user/create";
 
@@ -52,26 +50,24 @@ public class UserController {
 
     }
 
-
     @GetMapping("/update/{username}")
     public String editUser(@PathVariable("username") String username, Model model) {
 
         model.addAttribute("user", userService.findByUserName(username));
         model.addAttribute("roles", roleService.listAllRoles());
-        model.addAttribute("users", userService.listAllUser());
+        model.addAttribute("users", userService.listAllUsers());
 
         return "/user/update";
 
     }
 
-
     @PostMapping("/update")
-    public String updateUser(@Valid @ModelAttribute("user") UserDTO user, BindingResult bindingResult, Model model) {
+    public String updateUser(@ModelAttribute("user") UserDTO user, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("roles", roleService.listAllRoles());
-            model.addAttribute("users", userService.listAllUser());
+            model.addAttribute("users", userService.listAllUsers());
 
             return "/user/update";
 
@@ -82,14 +78,11 @@ public class UserController {
 
     }
 
-
     @GetMapping("/delete/{username}")
     public String deleteUser(@PathVariable("username") String username) {
 //        userService.deleteByUserName(username);
         userService.delete(username);
         return "redirect:/user/create";
     }
-
-
 
 }

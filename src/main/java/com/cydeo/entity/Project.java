@@ -1,7 +1,7 @@
 package com.cydeo.entity;
 
+
 import com.cydeo.enums.Status;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,16 +11,16 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "projects")
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@Table(name = "projects")
-@Where(clause = "is_deleted=false") /***/
-public class Project extends BaseEntity{
-    /***/
+@Where(clause = "is_deleted=false")
+public class Project extends BaseEntity {
 
     @Column(unique = true)
     private String projectCode;
+
     private String projectName;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,6 +29,7 @@ public class Project extends BaseEntity{
 
     @Column(columnDefinition = "DATE")
     private LocalDate startDate;
+
     @Column(columnDefinition = "DATE")
     private LocalDate endDate;
 
@@ -37,12 +38,5 @@ public class Project extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Status projectStatus;
 
-
-
-
-
-
-
-    /***/
 
 }

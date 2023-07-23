@@ -1,20 +1,18 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.UserDTO;
-import com.cydeo.entity.Role;
 import com.cydeo.entity.User;
 import com.cydeo.mapper.UserMapper;
 import com.cydeo.repository.UserRepository;
 import com.cydeo.service.UserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -25,11 +23,12 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
     }
 
-
     @Override
-    public List<UserDTO> listAllUser() {
+    public List<UserDTO> listAllUsers() {
+
         List<User> userList = userRepository.findAll(Sort.by("firstName"));
         return userList.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
+
     }
 
     @Override
@@ -38,29 +37,21 @@ public class UserServiceImpl implements UserService {
         return userMapper.convertToDTO(user);
     }
 
-
-    @Override
-    public List<UserDTO> listAllByRole(String role) {
-        List<User> users = userRepository.findAllByRoleDescriptionIgnoreCase(role);
-        return users.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
-    }
-
     @Override
     public void save(UserDTO dto) {
+
         userRepository.save(userMapper.convertToEntity(dto));
     }
 
     @Override
-    public  UserDTO update(UserDTO dto) {
-        //find the current user
+    public UserDTO update(UserDTO dto) {
+
+        //Find current user
         User user = userRepository.findByUserName(dto.getUserName());
-
-        //Map updated user dto to entity obj
+        //Map updated user dto to entity object
         User convertedUser = userMapper.convertToEntity(dto);
-
-        // set id to converted obj
+        //set id to converted object
         convertedUser.setId(user.getId());
-
         //save updated user
         userRepository.save(convertedUser);
 
@@ -70,9 +61,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteByUserName(String username) {
         userRepository.deleteByUserName(username);
+
     }
-
-
 
     @Override
     public void delete(String username) {
@@ -81,4 +71,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public List<UserDTO> listAllByRole(String role) {
+
+        List<User> users = userRepository.findAllByRoleDescriptionIgnoreCase(role);
+
+        return users.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
+    }
 }

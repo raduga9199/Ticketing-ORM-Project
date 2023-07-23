@@ -15,6 +15,7 @@ public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     @Column(nullable = false,updatable = false)
     private LocalDateTime insertDateTime;
@@ -25,11 +26,10 @@ public class BaseEntity {
     @Column(nullable = false)
     private Long lastUpdateUserId;
 
-    private Boolean isDeleted = false;
+    private Boolean isDeleted=false;
 
     @PrePersist
     public void onPrePersist(){
-
         this.insertDateTime = LocalDateTime.now();
         this.lastUpdateDateTime = LocalDateTime.now();
         this.insertUserId = 1L;
@@ -41,5 +41,10 @@ public class BaseEntity {
         this.lastUpdateDateTime = LocalDateTime.now();
         this.lastUpdateUserId = 1L;
     }
+
+
+
+
+
 
 }
