@@ -37,7 +37,7 @@ public class SecurityConfig {
                         "/login",
                         "/fragments/**",
                         "/assets/**",
-                        "/images"
+                        "/images/**"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
